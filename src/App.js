@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import data from "./data";
 
 import { ProductContext } from "./contexts/ProductContext";
+import { CartContext } from "./contexts/CartContext";
 
 // Components
 import Navigation from "./components/Navigation";
@@ -29,8 +30,9 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Navigation cart={cart} />
+	<div className="App">
+	<CartContext.Provider value={cart}>
+      <Navigation/>
 
       {/* Routes */}
       {/* ProductContext.Provider passes to the Products component an object containing the array of books and the addItem function */}
@@ -44,7 +46,8 @@ function App() {
         />
 
         <Route path="/cart" render={() => <ShoppingCart cart={cart} />} />
-      </ProductContext.Provider>
+	  </ProductContext.Provider>
+	  </CartContext.Provider>
     </div>
   );
 }
